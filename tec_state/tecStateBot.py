@@ -3,6 +3,7 @@ from discord import app_commands
 from tec_state.src.gameState import state_game
 from tec_state.src.playerState import state_player
 import configparser as cp
+from tec_state.src.serverState import server_state
 
 cfg = cp.ConfigParser()
 cfg.read("./../setup.cfg")
@@ -30,6 +31,11 @@ async def player_stats(interaction, username: str):
 async def game_stats(interaction):
     await interaction.response.send_message("Your request is being processed!")
     await state_game(interaction.channel, client, mc_channel)
+
+
+@tree.command(name="info", description="Gives the basic information about the minecraft server!", guild=guild)
+async def game_stats(interaction):
+    await server_state(interaction)
 
 
 client.run(token)
